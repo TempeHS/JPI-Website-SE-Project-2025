@@ -8,7 +8,7 @@ from flask_wtf import CSRFProtect
 from flask_csp.csp import csp_header
 import logging
 
-import userManagement as dbHandler
+import database_manager as dbHandler
 
 # Code snippet for logging a message
 # app.logger.critical("message")
@@ -59,7 +59,8 @@ def root():
     }
 )
 def index():
-    return render_template("/index.html")
+    data = dbHandler.listMotorcycle()
+    return render_template('/index.html', content=data)
 
 
 @app.route("/privacy.html", methods=["GET"])
@@ -67,15 +68,19 @@ def privacy():
     return render_template("/privacy.html")
 
 
-# example CSRF protected form
-@app.route("/form.html", methods=["POST", "GET"])
-def form():
-    if request.method == "POST":
-        email = request.form["email"]
-        text = request.form["text"]
-        return render_template("/form.html")
-    else:
-        return render_template("/form.html")
+@app.route("/forsale.html", methods=["GET"])
+def forsale():
+    motorcycles = dbHandler.listMotorcycle()
+    return render_template("forsale.html", content=motorcycles)
+
+@app.route("/gallery.html", methods=["GET"])
+def gallery():
+    return render_template("/gallery.html")
+
+@app.route("/relatedlinks.html", methods=["GET"])
+def relatedlinks():
+    return render_template("/relatedlinks.html")
+
 
 
 # Endpoint for logging CSP violations
