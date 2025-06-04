@@ -34,13 +34,19 @@
       <div class="offcanvas-body d-flex justify-content-center">
         <ul class="navbar-nav flex-grow-1 justify-content-center">
           <li class="nav-item">
-            <a class="nav-link text-white" href="index.html">Home</a>
+            <a class="nav-link text-white" href="{{ url_for('index') }}"
+              >Home</a
+            >
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white" href="forsale.html">For Sale</a>
+            <a class="nav-link text-white" href="{{ url_for('forsale') }}"
+              >For Sale</a
+            >
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white" href="gallery.html">Gallery</a>
+            <a class="nav-link text-white" href="{{url_for('gallery')}}"
+              >Gallery</a
+            >
           </li>
           <li class="nav-item">
             <a class="nav-link text-white" href="#">Related Links</a>

@@ -1,0 +1,17 @@
+-- database: ./data_source.db
+
+-- Use the ▷ button in the top right corner to run the entire file.
+
+INSERT INTO motorcycles (extID, name, about, price, location, year, contact, created_at)
+VALUES (
+  5,
+  'Indian Sidercar',
+  'Indian Sidecar with all brackets, in excellent condition',
+  'A$7,500',
+  'Melbourne, Victoria',
+  'N/A',
+  'Call Conor via +61 (0) 415581060',
+  CURRENT_TIMESTAMP
+);
+
+

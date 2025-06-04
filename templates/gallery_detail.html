@@ -1,0 +1,79 @@
+{% extends 'layout.html' %} {% block content %}
+
+<div class="mt-4 ms-4">
+  <a
+    href="{{ url_for('gallery') }}"
+    class="text-decoration-underline"
+    style="font-size: 1.1rem; color: #800000"
+  >
+    &laquo; Back
+  </a>
+</div>
+
+<h1 class="text-center">{{ gallery[1] }}</h1>
+<div class="container" style="max-width: 1000px; margin: auto">
+  <div class="row">
+    <div class="col-12 text-center mb-4">
+      {% if images %}
+      <div
+        id="carouselAutoplaying"
+        class="carousel slide"
+        data-bs-ride="carousel"
+        style="
+          max-width: 700px;
+          margin: auto;
+          border-radius: 2rem;
+          overflow: hidden;
+        "
+      >
+        <div class="carousel-inner">
+          {% for img in images %}
+          <div class="carousel-item {% if loop.first %}active{% endif %}">
+            <img
+              src="{{ url_for('static', filename=img[7:] if img.startswith('static/') else img) }}"
+              class="d-block w-100"
+              alt="Gallery image for {{ gallery[1] }}"
+              style="max-height: 500px; object-fit: cover"
+            />
+          </div>
+          {% endfor %}
+        </div>
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#carouselAutoplaying"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#carouselAutoplaying"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+      {% endif %}
+    </div>
+    <div class="col-12 d-flex justify-content-center">
+      <div
+        class="p-4 shadow-sm"
+        style="
+          background: #f8f9fa;
+          border-radius: 2rem;
+          max-width: 700px;
+          width: 100%;
+          margin: auto;
+        "
+      >
+        <p><strong>Year:</strong> {{ gallery[3] }}</p>
+        <p><strong>Description:</strong> {{ gallery[2] }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
