@@ -1,0 +1,28 @@
+-- database: /workspaces/JPI-Website-SE-Project-2025/.database/data_source.db
+-- adding motorcycle images 
+INSERT INTO motorcycle_images (motorcycle_id, image_path)
+VALUES
+  (5, 'static/images/IndianSidecar/IndianSidecar.png'),
+  (5, 'static/images/IndianSidecar/IndianSidecar1.png'),
+  (5, 'static/images/IndianSidecar/IndianSidecar2.png');
+
+
+-- adding bikes to gallery
+INSERT INTO gallery (name, description, year)
+VALUES
+  ('1947 Melbourne Chief', 'Sold brand new in Melbourne, when Frank purchased this 1947 Chief in 1963 it was in boxes. In 2009, it was resurrected after undergoing a total restoration. Modifications include the upgrading of the motor with 80" flywheels, bonville cams and followers, 12 volt electrical system and a 4 speed overdrive gear box.', '1947');
+
+
+-- adding images for gallery bikes
+INSERT INTO gallery_images (gallery_id, image_path)
+VALUES
+  (3, 'static/images/1947Melbournechief/1947Melbournechief.png'),
+  (3, 'static/images/1947Melbournechief/1947Melbournechief1.png'),
+  (3, 'static/images/1947Melbournechief/1947Melbournechief2.png'),
+  (3, 'static/images/1947Melbournechief/1947Melbournechief3.png'),
+  (3, 'static/images/1947Melbournechief/1947Melbournechief4.png'),
+  (3, 'static/images/1947Melbournechief/1947Melbournechief5.png'),
+  (3, 'static/images/1947Melbournechief/1947Melbournechief6.png'),
+  (3, 'static/images/1947Melbournechief/1947Melbournechief7.png');
+
+

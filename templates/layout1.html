@@ -1,3 +1,4 @@
+<!--Layout for pages with dynamic URLs which remove navbar contents-->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -19,13 +20,12 @@
     <link
       rel="icon"
       type="image/x-icon"
-      href="{{ url_for('static', filename='images/jpiwebsitelogo.png') }}"
+      href="{{ url_for('static', filename='images/favicon.png') }}"
     />
     <meta name="theme-color" content="" />
   </head>
   <body>
-    {% include "partials/menu.html" %} {% block content %}{% endblock %} {%
-    include "partials/footer.html" %}
+    {% block content %}{% endblock %} {% include "partials/footer.html" %}
     <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/serviceWorker.js') }}"></script>
     <script src="{{ url_for('static', filename='js/app.js') }}"></script>
