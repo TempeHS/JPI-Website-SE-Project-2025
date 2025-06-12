@@ -19,4 +19,9 @@ Here is the current website: https://www.parkerindian.com.au/index.html
 
 ## Sprint 1: v-00.00.01
 
-- set up basic format of website including: layout, navbar, page routes and colour scheme
+- Set up basic format of website including: layout, navbar, page routes and colour scheme
+
+## Sprint 2: v-00.00.02
+
+- Set up gallery page and for sale page card
+- Initialise database to input motorcycles to be automatically displayed on the frontend

@@ -10,6 +10,7 @@ import logging
 import sqlite3
 
 import database_manager as dbHandler
+from database_manager import getSoldMotorcycleById, getSoldMotorcycleImages
 
 # Code snippet for logging a message
 # app.logger.critical("message")
@@ -64,10 +65,6 @@ def index():
     return render_template('/index.html', content=data)
 
 
-@app.route("/privacy.html", methods=["GET"])
-def privacy():
-    return render_template("/privacy.html")
-
 
 @app.route("/forsale.html", methods=["GET"])
 def forsale():
@@ -98,6 +95,17 @@ def gallery_detail(gallery_id):
     images = [row[0] for row in cur.fetchall()]
     conn.close()
     return render_template('gallery_detail.html', gallery=gallery, images=images)
+
+@app.route("/sold.html", methods=["GET"])
+def sold():
+    sold_content = dbHandler.listSoldMotorcycles()
+    return render_template('sold.html', sold_content=sold_content)
+
+@app.route("/sold_motorcycle/<int:product_id>")
+def sold_motorcycle_detail(product_id):
+    product = dbHandler.getSoldMotorcycleById(product_id)
+    images = dbHandler.getSoldMotorcycleImages(product_id)
+    return render_template("sold_detail.html", product=product, images=images)
 
 
 

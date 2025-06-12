@@ -1,29 +1,95 @@
 {% extends 'layout.html' %} {% block content %}
-<div
-  class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-body-tertiary"
-  style="min-height: 60vh"
->
-  <!-- Background image -->
-  <div
-    class="w-100 h-100 position-absolute top-0 start-0"
-    style="
-      background: linear-gradient(135deg, #b0b0b0 0%, #e0e0e0 100%);
-      z-index: 0;
-      opacity: 0.4;
-      min-height: 60vh;
-      width: 100%;
-      height: 100%;
-    "
-  ></div>
-  <!-- Content on top -->
-  <div
-    class="col-md-6 p-lg-5 mx-auto my-5 position-relative"
-    style="z-index: 1"
-  >
-    <h1 class="display-3 fw-bold" style="text-shadow: 0 2px 8px #0008">
-      Jim Parker Indian Motorcycles
-    </h1>
-    <div class="d-flex gap-3 justify-content-center lead fw-normal"></div>
+<div class="p-5 mb-4 rounded-3" style="background-color: #800000 !important">
+  <div class="text-center">
+    <h1 class="display-5 fw-bold text-white">Jim Parker Indian Motorcycles</h1>
+    <p class="col-md-8 fs-4 text-white mx-auto">
+      The last Indian shop west of LA...
+    </p>
+    <a href="{{ url_for('forsale') }}" class="btn btn-lg text-white btn-maroon">
+      Browse For Sale
+    </a>
   </div>
 </div>
+<div class="container px-4 py-5" id="hanging-icons">
+  <h2 style="border-bottom: 2px solid #000">
+    <strong>Some services we offer</strong>
+    <hr />
+  </h2>
+  <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+    <div class="col d-flex align-items-start">
+      <div>
+        <h3
+          class="fs-2 text-body-emphasis d-flex align-items-center justify-content-center text-center"
+        >
+          Vintage Indian Motorcycle Restorations
+        </h3>
+        <img
+          src="{{ url_for('static', filename='images/services.png') }}"
+          alt="Restorations"
+          class="card-img-top rounded"
+          style="width: 100%; height: 200px; object-fit: cover"
+        />
+        <div class="card-body p-2">
+          <p class="card-text mb-0" style="font-size: 0.95rem">
+            We handle any job from servicing, carburettor, speedometer,
+            generator, distributor overhauls, wheel building, transmission, full
+            engine rebuilds to complete restorations on vintage Indian
+            Motorcycles.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col d-flex align-items-start">
+      <div>
+        <h3
+          class="fs-2 text-body-emphasis d-flex align-items-center justify-content-center text-center"
+        >
+          Frame and Fork Straightening
+        </h3>
+        <img
+          src="{{ url_for('static', filename='images/fork.jpg') }}"
+          alt="Fork and Frame Straightening"
+          class="card-img-top rounded"
+          style="width: 100%; height: 200px; object-fit: cover"
+        />
+        <div class="card-body p-2">
+          <p class="card-text mb-0" style="font-size: 0.95rem">
+            This is our personal specialty with a comprehensive frame jig,
+            designed and built under the supervision of leading motorcycle
+            engineer Lindsay Urquhart, is in place on the premises and is
+            supported by factory frame drawings and a full range of available
+            reproduction frame castings.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col d-flex align-items-start">
+      <div>
+        <h3
+          class="fs-2 text-body-emphasis d-flex align-items-center justify-content-center text-center"
+        >
+          Motorcycles and Parts For Sale
+        </h3>
+        <img
+          src="{{ url_for('static', filename='images/forsale.jpg') }}"
+          alt="Fork and Frame Straightening"
+          class="card-img-top rounded"
+          style="width: 100%; height: 200px; object-fit: cover"
+        />
+        <div class="card-body p-2">
+          <p class="card-text mb-0" style="font-size: 0.95rem">
+            We always have a range of machines on display for sale, including
+            Fours, Chiefs,Scouts, Despatch Tows and Traffic Cars. Over the
+            counter and mail order supply of a large range of parts from leading
+            US and Australian manufacturers are also available for most models.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="b-example-divider"></div>
 {% endblock %}
