@@ -1,11 +1,23 @@
 <nav
-  class="navbar navbar-expand-md sticky-top border-bottom"
-  style="background-color: #800000"
+  class="navbar navbar-expand-md navbar-dark bg-dark border-0 shadow-lg"
+  style="
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    z-index: 1050;
+    border-radius: 0;
+    min-width: 0;
+    max-width: none;
+    padding: 0.1rem 1rem;
+    background-color: #800000;
+    overflow: hidden;
+  "
   data-bs-theme="dark"
 >
-  <div class="container justify-content-center">
+  <div class="container-fluid justify-content-center" style="height: 100%">
     <button
-      class="navbar-toggler"
+      class="navbar-toggler ms-0"
       type="button"
       data-bs-toggle="offcanvas"
       data-bs-target="#offcanvas"
@@ -15,7 +27,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div
-      class="offcanvas offcanvas-end"
+      class="offcanvas offcanvas-start"
       tabindex="-1"
       id="offcanvas"
       aria-labelledby="offcanvasLabel"
@@ -31,7 +43,7 @@
           aria-label="Close"
         ></button>
       </div>
-      <div class="offcanvas-body d-flex justify-content-center">
+      <div class="offcanvas-body">
         <ul class="navbar-nav flex-grow-1 justify-content-center">
           <li class="nav-item">
             <a class="nav-link text-white" href="{{ url_for('index') }}"
@@ -49,10 +61,9 @@
             >
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white" href="#">Related Links</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-white" href="#">About us</a>
+            <a class="nav-link text-white" href="{{url_for('sold')}}"
+              >Recently Sold</a
+            >
           </li>
           <li class="nav-item">
             <a class="nav-link text-white" href="#">Workshop Notes</a>

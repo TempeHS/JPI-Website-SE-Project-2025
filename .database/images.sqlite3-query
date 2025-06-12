@@ -10,19 +10,24 @@ VALUES
 -- adding bikes to gallery
 INSERT INTO gallery (name, description, year)
 VALUES
-  ('1947 Melbourne Chief', 'Sold brand new in Melbourne, when Frank purchased this 1947 Chief in 1963 it was in boxes. In 2009, it was resurrected after undergoing a total restoration. Modifications include the upgrading of the motor with 80" flywheels, bonville cams and followers, 12 volt electrical system and a 4 speed overdrive gear box.', '1947');
-
+  ('1929 4 Cylinder', 'This 402 was sold new in Australia. It was restored at Parker Indian for an overseas client.', '1929');
 
 -- adding images for gallery bikes
 INSERT INTO gallery_images (gallery_id, image_path)
 VALUES
-  (3, 'static/images/1947Melbournechief/1947Melbournechief.png'),
-  (3, 'static/images/1947Melbournechief/1947Melbournechief1.png'),
-  (3, 'static/images/1947Melbournechief/1947Melbournechief2.png'),
-  (3, 'static/images/1947Melbournechief/1947Melbournechief3.png'),
-  (3, 'static/images/1947Melbournechief/1947Melbournechief4.png'),
-  (3, 'static/images/1947Melbournechief/1947Melbournechief5.png'),
-  (3, 'static/images/1947Melbournechief/1947Melbournechief6.png'),
-  (3, 'static/images/1947Melbournechief/1947Melbournechief7.png');
+  (13, 'static/images/19294Cylinder/19294Cylinder.png'),
+  (13, 'static/images/19294Cylinder/19294Cylinder1.png'),
+  (13, 'static/images/19294Cylinder/19294Cylinder2.png'),
+  (13, 'static/images/19294Cylinder/19294Cylinder3.png'),
+  (13, 'static/images/19294Cylinder/19294Cylinder4.png'),
+  (13, 'static/images/19294Cylinder/19294Cylinder5.png');
 
 
+-- adding images for sold motorcycles
+INSERT INTO sold_images (sold_id, image_path)
+VALUES
+  (12, 'static/images/1926Indianscoutbasket/1926Indianscoutbasket.png'),
+  (12, 'static/images/1926Indianscoutbasket/1926Indianscoutbasket1.png'),
+  (12, 'static/images/1926Indianscoutbasket/1926Indianscoutbasket2.png'),
+  (12, 'static/images/1926Indianscoutbasket/1926Indianscoutbasket3.png'),
+  (12, 'static/images/1926Indianscoutbasket/1926Indianscoutbasket4.png');

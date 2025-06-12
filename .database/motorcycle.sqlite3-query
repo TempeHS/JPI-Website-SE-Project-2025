@@ -2,6 +2,16 @@
 
 -- Use the ▷ button in the top right corner to run the entire file.
 
+-- adding sold motorcycles
+INSERT INTO sold_motorcycles (name, year, description, price)
+VALUES
+  ('1926 Indian Scout Basket Case', 
+  '1926', 
+  'Bike has no front but two rear. Many extra parts and and some new. More pics and details of the parts on request. Elderly owner began the restoration, but has run out of time.',
+  'A$24,000');
+
+
+--adding motorcycles for sale
 INSERT INTO motorcycles (extID, name, about, price, location, year, contact, created_at)
 VALUES (
   5,
@@ -13,5 +23,6 @@ VALUES (
   'Call Conor via +61 (0) 415581060',
   CURRENT_TIMESTAMP
 );
+
 
 

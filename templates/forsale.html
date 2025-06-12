@@ -9,12 +9,12 @@
   <div class="row">
     {% for row in content %}
     <div class="col-md-3 mb-4 d-flex align-items-stretch">
-      <div class="card" style="max-width: 100%; width: 100%">
+      <div class="card h-100" style="width: 100%; min-height: 420px; max-height: 420px;">
         <img
           class="card-img-top"
           src="{{ url_for('static', filename=row[-1].replace('static/', '')) if row[-1] else url_for('static', filename='images/default.jpg') }}"
           alt="Product image for the {{ row[1] }}"
-          style="max-height: 250px; object-fit: cover"
+          style="height: 200px; object-fit: cover; width: 100%;"
         />
         <div class="card-body d-flex flex-column">
           <h5 class="card-title">{{ row[1] }}</h5>

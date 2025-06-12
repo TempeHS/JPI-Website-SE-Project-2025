@@ -24,8 +24,9 @@
     <meta name="theme-color" content="" />
   </head>
   <body>
-    {% include "partials/menu.html" %} {% block content %}{% endblock %} {%
-    include "partials/footer.html" %}
+    {% include 'partials/menu.html' %}
+    <div style="height: 90px"></div>
+    {% block content %}{% endblock %} {% include "partials/footer.html" %}
     <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/serviceWorker.js') }}"></script>
     <script src="{{ url_for('static', filename='js/app.js') }}"></script>
