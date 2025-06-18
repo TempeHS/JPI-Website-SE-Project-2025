@@ -1,4 +1,5 @@
 import sqlite3
+import sqlite3 as sql
 
 def listMotorcycle():
     conn = sqlite3.connect('.database/data_source.db')
@@ -77,4 +78,34 @@ def listSoldMotorcycles():
     sold_motorcycles = cur.fetchall()
     conn.close()
     return sold_motorcycles
+
+def authenticate_user(username, password):
+    conn = sqlite3.connect('.database/data_source.db')
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM users WHERE username = ? AND password = ?", (username, password))
+    user = cur.fetchone()
+    conn.close()
+    return user is not None
+
+def addMotorcycle(name, price, about, location, year, contact):
+    conn = sqlite3.connect('.database/data_source.db')
+    cur = conn.cursor()
+    cur.execute(
+        "INSERT INTO motorcycles (name, price, about, location, year, contact) VALUES (?, ?, ?, ?, ?, ?)",
+        (name, price, about, location, year, contact)
+    )
+    motorcycle_id = cur.lastrowid
+    conn.commit()
+    conn.close()
+    return motorcycle_id
+
+def addMotorcycleImage(motorcycle_id, image_path):
+    conn = sqlite3.connect('.database/data_source.db')
+    cur = conn.cursor()
+    cur.execute(
+        "INSERT INTO motorcycle_images (motorcycle_id, image_path) VALUES (?, ?)",
+        (motorcycle_id, image_path)
+    )
+    conn.commit()
+    conn.close()
 

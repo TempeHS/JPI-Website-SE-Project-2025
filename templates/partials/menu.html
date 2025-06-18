@@ -1,21 +1,22 @@
 <nav
-  class="navbar navbar-expand-md navbar-dark bg-dark border-0 shadow-lg"
+  class="navbar navbar-expand-md navbar-dark"
   style="
-    position: fixed;
-    top: 0;
-    left: 0;
     width: 100vw;
+    left: 0;
+    right: 0;
+    top: 0;
+    position: fixed;
+    background-color: #800000;
     z-index: 1050;
     border-radius: 0;
     min-width: 0;
     max-width: none;
     padding: 0.1rem 1rem;
-    background-color: #800000;
     overflow: hidden;
   "
   data-bs-theme="dark"
 >
-  <div class="container-fluid justify-content-center" style="height: 100%">
+  <div class="container-fluid" style="height: 100%">
     <button
       class="navbar-toggler ms-0"
       type="button"
@@ -26,6 +27,16 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button>
+
+    <!-- Place this inside your navbar, typically before or after the toggler button -->
+    <a class="navbar-brand" href="{{ url_for('index') }}">
+      <img
+        src="{{ url_for('static', filename='images/jpilogo.png') }}"
+        alt="Jim Parker Indian Motorcycles Logo"
+        style="height: 80px; width: auto; max-width: 200px; object-fit: contain"
+      />
+    </a>
+
     <div
       class="offcanvas offcanvas-start"
       tabindex="-1"
@@ -64,9 +75,6 @@
             <a class="nav-link text-white" href="{{url_for('sold')}}"
               >Recently Sold</a
             >
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-white" href="#">Workshop Notes</a>
           </li>
         </ul>
       </div>

@@ -1,0 +1,56 @@
+{% extends 'layout.html' %} {% block content %}
+<div
+  class="d-flex justify-content-center align-items-start"
+  style="min-height: 60vh; padding-top: 40px"
+>
+  <div class="card shadow" style="width: 100%; max-width: 400px; padding: 2rem">
+    <div
+      style="
+        background-color: #800000;
+        text-align: center;
+        padding: 1rem;
+        border-radius: 0.5rem 0.5rem 0 0;
+        margin: -2rem -2rem 2rem -2rem;
+      "
+    >
+      <img
+        src="{{ url_for('static', filename='images/jpilogo.png') }}"
+        alt="Jim Parker Indian Motorcycles Logo"
+        style="height: 80px; width: auto; max-width: 220px; object-fit: contain"
+      />
+    </div>
+    {% if error %}
+    <div class="alert alert-danger" role="alert">{{ error }}</div>
+    {% endif %}
+    <form
+      method="POST"
+      class="d-flex flex-column align-items-center"
+      style="width: 100%"
+    >
+      <input
+        name="username"
+        type="text"
+        class="form-control mb-3"
+        style="max-width: 320px; width: 90%"
+        placeholder="Username"
+        required
+      />
+      <input
+        name="password"
+        type="password"
+        class="form-control mb-3"
+        style="max-width: 320px; width: 90%"
+        placeholder="Password"
+        required
+      />
+      <button
+        type="submit"
+        class="btn btn-maroon mt-3"
+        style="min-width: 120px"
+      >
+        Submit
+      </button>
+    </form>
+  </div>
+</div>
+{% endblock %}
