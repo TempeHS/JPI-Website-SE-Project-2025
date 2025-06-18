@@ -1,16 +1,16 @@
-from flask import Flask
-from flask import redirect
-from flask import render_template
-from flask import request
+from flask import Flask, redirect, render_template, url_for, request, session
+from flask import flash  
 from flask import jsonify
 import requests
 from flask_wtf import CSRFProtect
 from flask_csp.csp import csp_header
 import logging
 import sqlite3
+import os
+from werkzeug.utils import secure_filename
 
 import database_manager as dbHandler
-from database_manager import getSoldMotorcycleById, getSoldMotorcycleImages
+
 
 # Code snippet for logging a message
 # app.logger.critical("message")
@@ -23,11 +23,15 @@ logging.basicConfig(
     format="%(asctime)s %(message)s",
 )
 
-# Generate a unique basic 16 key: https://acte.ltd/utils/randomkeygen
 app = Flask(__name__)
-app.secret_key = b"_53oi3uriq9pifpff;apl"
-csrf = CSRFProtect(app)
+app.secret_key = "L_l~qr=s(kp~mSZ2Ova$7hX?DXV?R5q"
+## csrf = CSRFProtect(app)
 
+##WTF_CSRF_ENABLED = False
+
+UPLOAD_FOLDER = 'static/images/motorcycles'
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 # Redirect index.html to domain root for consistent UX
 @app.route("/index", methods=["GET"])
@@ -82,6 +86,42 @@ def product_detail(product_id):
     images = dbHandler.getMotorcycleImages(product_id)
     return render_template('product_detail.html', product=product, images=images)
 
+
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    error = None
+    if request.method == "POST":
+        username = request.form.get("username")
+        password = request.form.get("password")
+        if dbHandler.authenticate_user(username, password):
+            session['user_id'] = username
+            return redirect(url_for('cards'))  # Redirect to /cards
+        else:
+            error = "Incorrect username or password"
+    return render_template("login.html", error=error)
+
+@app.route("/cards", methods=["GET", "POST"])
+def cards():
+    if request.method == "POST":
+        name = request.form.get("name")
+        price = request.form.get("price")
+        about = request.form.get("description")
+        location = request.form.get("location")
+        year = request.form.get("year")
+        contact = request.form.get("contact")
+        images = request.files.getlist("images")
+        motorcycle_id = dbHandler.addMotorcycle(name, price, about, location, year, contact)
+        for image in images:
+            if image and image.filename:
+                filename = secure_filename(image.filename)
+                save_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+                image.save(save_path)
+                dbHandler.addMotorcycleImage(motorcycle_id, save_path)
+        return redirect(url_for('cards', success=1))
+    success = request.args.get('success')
+    return render_template("cards.html", success=success)
+
 @app.route('/gallery/<int:gallery_id>')
 def gallery_detail(gallery_id):
     import sqlite3
@@ -108,10 +148,9 @@ def sold_motorcycle_detail(product_id):
     return render_template("sold_detail.html", product=product, images=images)
 
 
-
 # Endpoint for logging CSP violations
 @app.route("/csp_report", methods=["POST"])
-@csrf.exempt
+##@csrf.exempt
 def csp_report():
     app.logger.critical(request.data.decode())
     return "done"

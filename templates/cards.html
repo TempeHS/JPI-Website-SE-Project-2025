@@ -1,0 +1,111 @@
+{% extends 'layout.html' %} {% block content %}
+<div
+  class="d-flex justify-content-center align-items-start"
+  style="min-height: 100vh; padding-top: 40px"
+>
+  <div class="container" style="max-width: 700px">
+    <div class="text-center mb-4">
+      <h2 class="fw-bold">Add Motorcycles</h2>
+    </div>
+    {% if success %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      Motorcycle added successfully!
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="alert"
+        aria-label="Close"
+      ></button>
+    </div>
+    {% endif %}
+    <form
+      class="row g-3 bg-white p-4 rounded shadow"
+      method="POST"
+      enctype="multipart/form-data"
+    >
+      <div class="col-md-6">
+        <label for="name" class="form-label">Model</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          name="name"
+          placeholder="Motorcycle Model"
+          required
+        />
+      </div>
+      <div class="col-md-6">
+        <label for="price" class="form-label">Price</label>
+        <input
+          type="text"
+          class="form-control"
+          id="price"
+          name="price"
+          placeholder="A$"
+          required
+        />
+      </div>
+      <div class="col-12">
+        <label for="MotorcycleDescription" class="form-label"
+          >Description</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="MotorcycleDescription"
+          name="description"
+          placeholder="Motorcycle Description"
+          required
+        />
+      </div>
+      <div class="col-md-6">
+        <label for="Location" class="form-label">Location</label>
+        <input
+          type="text"
+          class="form-control"
+          id="Location"
+          name="location"
+          required
+        />
+      </div>
+      <div class="col-md-2">
+        <label for="ModelYear" class="form-label">Model Year</label>
+        <input
+          type="text"
+          class="form-control"
+          id="ModelYear"
+          name="year"
+          placeholder="0000"
+          required
+        />
+      </div>
+      <div class="col-md-6">
+        <label for="contact" class="form-label">Contact</label>
+        <input
+          type="text"
+          class="form-control"
+          id="contact"
+          name="contact"
+          placeholder="Contact Info"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="formFileMultiple" class="form-label">Upload Images</label>
+        <input
+          class="form-control"
+          type="file"
+          id="formFileMultiple"
+          name="images"
+          multiple
+        />
+      </div>
+      <div class="col-12">
+        <button type="submit" class="btn btn-primary w-100">
+          Add Motorcycle
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
