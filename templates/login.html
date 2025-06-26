@@ -36,6 +36,7 @@
         required
       />
       <input
+        id="login_password"
         name="password"
         type="password"
         class="form-control mb-3"
@@ -43,14 +44,29 @@
         placeholder="Password"
         required
       />
+      <div class="mb-2" style="width: 100%; max-width: 320px">
+        <input
+          type="checkbox"
+          id="showLoginPassword"
+          onclick="toggleLoginPasswordVisibility()"
+        />
+        Show Password
+      </div>
       <button
         type="submit"
         class="btn btn-maroon mt-3"
         style="min-width: 120px"
       >
-        Submit
+        Login
       </button>
     </form>
+    <script>
+      function toggleLoginPasswordVisibility() {
+        var pw = document.getElementById("login_password");
+        var show = document.getElementById("showLoginPassword").checked;
+        pw.type = show ? "text" : "password";
+      }
+    </script>
   </div>
 </div>
 {% endblock %}

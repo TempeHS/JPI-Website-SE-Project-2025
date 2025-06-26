@@ -1,5 +1,5 @@
+import hashlib
 import sqlite3
-import sqlite3 as sql
 
 def listMotorcycle():
     conn = sqlite3.connect('.database/data_source.db')
@@ -82,7 +82,11 @@ def listSoldMotorcycles():
 def authenticate_user(username, password):
     conn = sqlite3.connect('.database/data_source.db')
     cur = conn.cursor()
-    cur.execute("SELECT * FROM users WHERE username = ? AND password = ?", (username, password))
+    hashed_password = hashlib.sha256(password.encode('utf-8')).hexdigest()
+    cur.execute(
+        "SELECT * FROM users WHERE username = ? AND password = ?",
+        (username, hashed_password)
+    )
     user = cur.fetchone()
     conn.close()
     return user is not None
@@ -106,6 +110,38 @@ def addMotorcycleImage(motorcycle_id, image_path):
         "INSERT INTO motorcycle_images (motorcycle_id, image_path) VALUES (?, ?)",
         (motorcycle_id, image_path)
     )
+    conn.commit()
+    conn.close()
+
+def add_user(username, email, password):
+    conn = sqlite3.connect('.database/data_source.db')
+    cur = conn.cursor()
+    # Hash the password using SHA-256
+    hashed_password = hashlib.sha256(password.encode('utf-8')).hexdigest()
+    try:
+        cur.execute(
+            "INSERT INTO users (username, email, password) VALUES (?, ?, ?)",
+            (username, email, hashed_password)
+        )
+        conn.commit()
+        return True
+    except sqlite3.IntegrityError:
+        return False
+    finally:
+        conn.close()
+
+def get_user_totp_secret(username):
+    conn = sqlite3.connect('.database/data_source.db')
+    cur = conn.cursor()
+    cur.execute("SELECT totp_secret FROM users WHERE username = ?", (username,))
+    row = cur.fetchone()
+    conn.close()
+    return row[0] if row and row[0] else None
+    
+def set_user_totp_secret(username, secret):
+    conn = sqlite3.connect('.database/data_source.db')
+    cur = conn.cursor()
+    cur.execute("UPDATE users SET totp_secret = ? WHERE username = ?", (secret, username))
     conn.commit()
     conn.close()
 
