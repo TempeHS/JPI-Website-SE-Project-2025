@@ -1,0 +1,30 @@
+{% extends 'layout.html' %} {% block content %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/style.css') }}"
+/>
+<div
+  style="
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 80vh;
+    padding-top: 5vh;
+  "
+>
+  <h2 style="color: #800000; margin-bottom: 2rem; text-align: center">
+    Welcome back {{ session.username }}!
+  </h2>
+  <div style="display: flex; gap: 2rem">
+    <!-- Add Admin Card -->
+    <a href="{{ url_for('adduser') }}" style="text-decoration: none">
+      <div class="userhome-btn">Add Admin</div>
+    </a>
+    <!-- Add Motorcycle Card -->
+    <a href="{{ url_for('cards') }}" style="text-decoration: none">
+      <div class="userhome-btn">Add Motorcycle</div>
+    </a>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,126 @@
+{% extends 'layout.html' %} {% block content %}
+<div style="height: 56px"></div>
+<a
+  href="javascript:history.back()"
+  style="
+    position: absolute;
+    top: 76px;
+    left: 20px;
+    text-decoration: none;
+    color: #800000;
+    font-weight: bold;
+    font-size: 1.1rem;
+    z-index: 1100;
+  "
+>
+  &larr; Back
+</a>
+<div
+  class="d-flex justify-content-center align-items-start"
+  style="min-height: 60vh; padding-top: 40px"
+>
+  <div class="card shadow" style="width: 100%; max-width: 400px; padding: 2rem">
+    <div
+      style="
+        background-color: #800000;
+        text-align: center;
+        padding: 1rem;
+        border-radius: 0.5rem 0.5rem 0 0;
+        margin: -2rem -2rem 2rem -2rem;
+      "
+    >
+      <img
+        src="{{ url_for('static', filename='images/jpilogo.png') }}"
+        alt="Jim Parker Indian Motorcycles Logo"
+        style="height: 80px; width: auto; max-width: 220px; object-fit: contain"
+      />
+    </div>
+    <h2 class="text-center mb-4" style="color: #800000">Add Admin</h2>
+    {% if error %}
+    <div class="alert alert-danger" role="alert">{{ error }}</div>
+    {% endif %}
+    <form
+      method="POST"
+      class="d-flex flex-column align-items-center"
+      style="width: 100%"
+      onsubmit="return validatePasswords();"
+    >
+      <input
+        name="username"
+        type="text"
+        class="form-control mb-3"
+        style="max-width: 320px; width: 90%"
+        placeholder="Username"
+        required
+      />
+      <input
+        name="email"
+        type="email"
+        class="form-control mb-3"
+        style="max-width: 320px; width: 90%"
+        placeholder="Email"
+        required
+      />
+      <input
+        id="password"
+        name="password"
+        type="password"
+        class="form-control mb-3"
+        style="max-width: 320px; width: 90%"
+        placeholder="Password"
+        required
+      />
+      <input
+        id="confirm_password"
+        name="confirm_password"
+        type="password"
+        class="form-control mb-3"
+        style="max-width: 320px; width: 90%"
+        placeholder="Confirm Password"
+        required
+      />
+      <div class="mb-2" style="width: 100%; max-width: 320px">
+        <input
+          type="checkbox"
+          id="showPassword"
+          onclick="togglePasswordVisibility()"
+        />
+        Show Password
+      </div>
+      <div
+        id="password-error"
+        class="text-danger mb-2"
+        style="display: none"
+      ></div>
+      <button
+        type="submit"
+        class="btn btn-maroon mt-3"
+        style="min-width: 120px"
+      >
+        Submit
+      </button>
+    </form>
+    <script>
+      function validatePasswords() {
+        var pw = document.getElementById("password").value;
+        var cpw = document.getElementById("confirm_password").value;
+        var errorDiv = document.getElementById("password-error");
+        if (pw !== cpw) {
+          errorDiv.style.display = "block";
+          errorDiv.textContent = "Passwords do not match.";
+          return false;
+        }
+        errorDiv.style.display = "none";
+        return true;
+      }
+      function togglePasswordVisibility() {
+        var pw = document.getElementById("password");
+        var cpw = document.getElementById("confirm_password");
+        var show = document.getElementById("showPassword").checked;
+        pw.type = show ? "text" : "password";
+        cpw.type = show ? "text" : "password";
+      }
+    </script>
+  </div>
+</div>
+{% endblock %}

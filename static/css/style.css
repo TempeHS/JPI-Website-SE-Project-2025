@@ -150,3 +150,18 @@ nav.navbar .nav-link.text-white:focus {
   padding-right: 0 !important;
   min-height: 700px;
 }
+.userhome-btn {
+  background-color: #800000;
+  color: white;
+  padding: 2rem 3rem;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  font-size: 1.5rem;
+  transition: transform 0.2s, background 0.2s;
+  cursor: pointer;
+}
+.userhome-btn:hover {
+  background-color: #a83232;
+  transform: scale(1.05);
+}

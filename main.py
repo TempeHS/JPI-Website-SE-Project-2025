@@ -1,19 +1,16 @@
 from flask import Flask, redirect, render_template, url_for, request, session
 from flask import flash  
 from flask import jsonify
-import requests
 from flask_wtf import CSRFProtect
 from flask_csp.csp import csp_header
 import logging
-import sqlite3
 import os
 from werkzeug.utils import secure_filename
+import pyotp
+import qrcode
 
 import database_manager as dbHandler
-
-
-# Code snippet for logging a message
-# app.logger.critical("message")
+from sv_user import sanitize_input
 
 app_log = logging.getLogger(__name__)
 logging.basicConfig(
@@ -87,19 +84,63 @@ def product_detail(product_id):
     return render_template('product_detail.html', product=product, images=images)
 
 
-
 @app.route("/login", methods=["GET", "POST"])
 def login():
     error = None
     if request.method == "POST":
-        username = request.form.get("username")
+        username = sanitize_input(request.form.get("username"))
         password = request.form.get("password")
         if dbHandler.authenticate_user(username, password):
-            session['user_id'] = username
-            return redirect(url_for('cards'))  # Redirect to /cards
+            session["username"] = username
+
+            # Get or create TOTP secret for this user
+            secret = dbHandler.get_user_totp_secret(username)
+            if not secret:
+                secret = pyotp.random_base32()
+                dbHandler.set_user_totp_secret(username, secret)
+            session["secret"] = secret
+            session["user_id"] = username
+            return redirect(url_for("show_qr"))
         else:
-            error = "Incorrect username or password"
+            error = "Invalid username or password."
     return render_template("login.html", error=error)
+
+@app.route('/show_qr', methods=['GET', 'POST'])
+def show_qr():
+    if request.method == 'POST':
+        otp = request.form.get('otp')
+        secret = session.get('secret')
+        totp = pyotp.TOTP(secret)
+        if otp and totp.verify(otp):
+            session.pop('secret', None)
+            return redirect(url_for('userhome'))
+        else:
+            flash('Incorrect Code')
+            return redirect(url_for('show_qr'))
+    
+    secret = session.get('secret')
+    email = session.get('user_id')
+    totp = pyotp.TOTP(secret)
+    uri = totp.provisioning_uri(name=email, issuer_name="Jim Parker Indian Motorcycles")
+    
+    # Generate QR code
+    qr = qrcode.QRCode(
+        version=1,
+        error_correction=qrcode.constants.ERROR_CORRECT_L,
+        box_size=10,
+        border=4,
+    )
+    qr.add_data(uri)
+    qr.make(fit=True)
+    img = qr.make_image(fill_color='black', back_color='white')
+    
+    # Save QR code to a temporary file
+    img_path = os.path.join('static', 'qr_code.png')
+    img.save(img_path)
+    
+    return render_template('qrcode.html', qr_code_url=url_for('static', filename='qr_code.png'))
+
+
 
 @app.route("/cards", methods=["GET", "POST"])
 def cards():
@@ -155,6 +196,27 @@ def csp_report():
     app.logger.critical(request.data.decode())
     return "done"
 
+
+@app.route("/add_admin", methods=["GET", "POST"])
+def adduser():
+    error = None
+    if request.method == "POST":
+        username = request.form.get("username")
+        email = request.form.get("email")
+        password = request.form.get("password")
+        if not username or not email or not password:
+            error = "All fields are required."
+        else:
+            success = dbHandler.add_user(username, email, password)
+            if success:
+                return redirect(url_for('/add_admin'))
+            else:
+                error = "Username or email already exists."
+    return render_template("adduser.html", error=error)
+
+@app.route("/userhome", methods=["GET"])
+def userhome():
+    return render_template("userhome.html")
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=5000)
