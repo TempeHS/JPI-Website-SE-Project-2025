@@ -89,3 +89,14 @@ Set up basic format of website, removed unused files and add new templates
 - Fixed sold_detail.html to correctly display the price instead of location
 
 ### Sprint 5
+Add user management and QR code functionality:
+
+- Implemented user input sanitization in sv_user.py to prevent SQL injection.
+- Created adduser.html for adding new admin users with password validation.
+- Updated cards.html and gallery.html with back navigation and improved titles.
+- Enhanced login.html with password visibility toggle and changed submit button text to "Login".
+- Added qrcode.html for two-factor authentication with QR code scanning.
+- Updated sold.html with a description for recently sold motorcycles.
+- Created userhome.html for user dashboard with options to add admin and motorcycle.
+- Added new styles for user home buttons in style.css.
+- Included a new QR code image in static directory.
