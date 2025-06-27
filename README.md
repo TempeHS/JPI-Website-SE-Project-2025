@@ -23,10 +23,12 @@ This project is part of the 2025 Software Engineering Major Project. The project
 - Implement an OOP method of displaying products and motorcycles on specific pages and dynamic URLs
 
 ## Redeveloped Website (Customer view)
+(video of customer view of website)
 
 <video controls src="JPI.mp4" title="JPI Customer View"></video>
 
 ## Redeveloped Website (Admin view)
+(video of admin view of website)
 
 <video controls src="JPI Admin.mp4" title="Title"></video>
 
